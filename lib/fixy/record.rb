@@ -6,8 +6,15 @@ module Fixy
     DEFAULT_LINE_ENDING = LINE_ENDING_LF
 
     class << self
+      def inherited(subclass)
+        super
+        subclass.instance_variable_set(:@record_fields, record_fields.dup)
+        subclass.instance_variable_set(:@record_length, record_length.dup)
+        subclass.instance_variable_set(:@line_ending, line_ending.dup)
+      end
+
       def set_record_length(count)
-        define_singleton_method('record_length') { count }
+        @record_length = count
       end
 
       def set_line_ending(character)
