@@ -76,6 +76,10 @@ module Fixy
         @line_ending || DEFAULT_LINE_ENDING
       end
 
+      def record_length
+        @record_length
+      end
+
       def default_record_fields
         if superclass.respond_to?(:record_fields, true) && superclass.record_fields
           superclass.record_fields.dup
@@ -170,6 +174,10 @@ module Fixy
     # Retrieves the line ending for this record type
     def line_ending
       self.class.line_ending
+    end
+
+    def record_length
+      self.class.record_length
     end
   end
 end
